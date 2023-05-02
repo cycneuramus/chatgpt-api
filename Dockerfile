@@ -17,8 +17,8 @@ RUN go build -o /app/ChatGPT-to-API .
 
 FROM scratch
 
-WORKDIR /app
 COPY --from=builder /app/ChatGPT-to-API /app/ChatGPT-to-API
+WORKDIR /app/ChatGPT-to-API
 
 EXPOSE 8080
 
