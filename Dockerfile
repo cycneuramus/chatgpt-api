@@ -10,16 +10,15 @@ FROM public.ecr.aws/docker/library/golang:1.20 as builder
 ENV CGO_ENABLED=0
 
 COPY --from=git /tmp/ChatGPT-to-API /app/ChatGPT-to-API
-WORKDIR /app/ChatGPT-to-API
 
+WORKDIR /app/ChatGPT-to-API
 RUN go mod download
-RUN go build -o /app/ChatGPT-to-API .
+RUN go build -o chatgpt-to-api .
 
 FROM scratch
-
 COPY --from=builder /app/ChatGPT-to-API /app/ChatGPT-to-API
 WORKDIR /app/ChatGPT-to-API
 
 EXPOSE 8080
 
-CMD [ "./ChatGPT-To-API" ]
+CMD [ "./chatgpt-to-api" ]
